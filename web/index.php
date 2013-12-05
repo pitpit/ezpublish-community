@@ -18,15 +18,13 @@ if ( ( $useDebugging = getenv( "USE_DEBUGGING" ) ) === false )
     $useDebugging = $environment === "dev";
 }
 
-if ( $useDebugging && isset( $_COOKIE['XDEBUG_SESSION'] ) )
+if ( $useDebugging )
 {
     $loader = require_once __DIR__ . '/../ezpublish/autoload.php';
-    $isInteractiveDebugging = true;
 }
 else
 {
     $loader = require_once __DIR__ . '/../ezpublish/bootstrap.php.cache';
-    $isInteractiveDebugging = false;
 }
 
 // Depending on the USE_APC_CLASSLOADER environment variable, use APC for autoloading to improve performance.
@@ -49,7 +47,7 @@ if ( $useDebugging )
 $kernel = new EzPublishKernel( $environment, $useDebugging );
 
 // we don't want to use the classes cache if we are in a debug session
-if ( !$isInteractiveDebugging )
+if ( !$useDebugging )
 {
     $kernel->loadClassCache();
 }
