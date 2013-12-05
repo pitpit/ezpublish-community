@@ -40,7 +40,6 @@ if ( getenv( "USE_APC_CLASSLOADER" ) )
 }
 
 require_once __DIR__ . '/../ezpublish/EzPublishKernel.php';
-require_once __DIR__ . '/../ezpublish/EzPublishCache.php';
 
 if ( $useDebugging )
 {
@@ -64,6 +63,7 @@ if ( ( $useHttpCache = getenv( "USE_HTTP_CACHE" ) ) === false )
 // Load HTTP Cache ...
 if ( $useHttpCache )
 {
+    require_once __DIR__ . '/../ezpublish/EzPublishCache.php';
     $kernel = new EzPublishCache( $kernel );
 }
 
