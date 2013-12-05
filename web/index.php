@@ -18,15 +18,15 @@ if ( ( $useDebugging = getenv( "USE_DEBUGGING" ) ) === false )
     $useDebugging = $environment === "dev";
 }
 
-$isInteractiveDebugging = !$useDebugging ? false : isset( $_COOKIE['XDEBUG_SESSION'] );
-
-if ( !$isInteractiveDebugging )
+if ( $useDebugging && isset( $_COOKIE['XDEBUG_SESSION'] ) )
 {
-    $loader = require_once __DIR__ . '/../ezpublish/bootstrap.php.cache';
+    $loader = require_once __DIR__ . '/../ezpublish/autoload.php';
+    $isInteractiveDebugging = true;
 }
 else
 {
-    $loader = require_once __DIR__ . '/../ezpublish/autoload.php';
+    $loader = require_once __DIR__ . '/../ezpublish/bootstrap.php.cache';
+    $isInteractiveDebugging = false;
 }
 
 // Depending on the USE_APC_CLASSLOADER environment variable, use APC for autoloading to improve performance.
