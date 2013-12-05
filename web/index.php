@@ -18,7 +18,7 @@ if ( ( $useDebugging = getenv( "USE_DEBUGGING" ) ) === false )
     $useDebugging = $environment === "dev";
 }
 
-$isInteractiveDebugging = !$useDebugging ?: isset( $_COOKIE['XDEBUG_SESSION'] );
+$isInteractiveDebugging = !$useDebugging ? false : isset( $_COOKIE['XDEBUG_SESSION'] );
 
 if ( !$isInteractiveDebugging )
 {
